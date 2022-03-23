@@ -3,15 +3,16 @@ import 'package:travel_app/misc/colors.dart';
 import 'package:travel_app/widget/app_buttons.dart';
 import 'package:travel_app/widget/app_large_text.dart';
 import 'package:travel_app/widget/app_text.dart';
+import 'package:travel_app/widget/responsive_button.dart';
 
-class DeatailPage extends StatefulWidget {
-  const DeatailPage({Key? key}) : super(key: key);
+class DetailPage extends StatefulWidget {
+  const DetailPage({Key? key}) : super(key: key);
 
   @override
-  State<DeatailPage> createState() => _DeatailPageState();
+  State<DetailPage> createState() => _DetailPageState();
 }
 
-class _DeatailPageState extends State<DeatailPage> {
+class _DetailPageState extends State<DetailPage> {
   int gottenStars = 4;
   int selectedIndex = -1;
 
@@ -136,14 +137,41 @@ class _DeatailPageState extends State<DeatailPage> {
                           );
                         }),
                       ),
+                      // Description text
                       SizedBox(height: 10),
                       AppLargeText(
                         text: 'Description',
                         color: Colors.black.withOpacity(0.8),
                         size: 20,
-                      )
+                      ),
+                      SizedBox(height: 5),
+                      AppText(
+                          text:
+                              'You must go for a travel. Travelling helps get rid of pressure. Got to the mountains to see the nature',
+                          color: AppColors.mainColor),
                     ],
                   ))),
+          Positioned(
+            bottom: 20,
+            left: 20,
+            right: 20,
+            child: Row(
+              children: [
+                AppButtons(
+                    color: AppColors.textColor1,
+                    backgroundColor: AppColors.buttonBackground,
+                    size: 60,
+                    icon: Icons.favorite_border,
+                    isIcon: true,
+                    borderColor: AppColors.textColor1),
+                SizedBox(width: 20),
+                ResponsiveButton(
+                  // width: 100,
+                  isResponsive: true,
+                )
+              ],
+            ),
+          )
         ],
       ),
     ));
