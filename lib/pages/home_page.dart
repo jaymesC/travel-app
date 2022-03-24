@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
         body: BlocBuilder<AppCubits, CubitStates>(builder: (context, state) {
       if (state is LoadedState) {
+        var info = state.places;
         return Container(
           // padding: const EdgeInsets.only(
           //   top: 40.0,
@@ -94,20 +95,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   width: double.maxFinite,
                   child: TabBarView(controller: _tabController, children: [
                     ListView.builder(
-                      itemCount: 3,
+                      itemCount: info.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                            margin: const EdgeInsets.only(right: 15, top: 7),
-                            width: 200,
-                            height: 300,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              image: DecorationImage(
-                                  image: AssetImage('img/mountain.jpeg'),
-                                  fit: BoxFit.cover),
-                            ));
+                        return GestureDetector(
+                           onTap: () {
+                            BlocProvider.of<AppCubits>(context)
+                                .detailPage(info[index]);
+                          },
+                          child: Container(
+                              margin: const EdgeInsets.only(right: 15, top: 7),
+                              width: 200,
+                              height: 300,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                    image: NetworkImage('http://mark.bslmeiyu.com/uploads/'+info[index].img),
+                                    fit: BoxFit.cover),
+                              )),
+                        );
                       },
                     ),
                     Text('There'),
